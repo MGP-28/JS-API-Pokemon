@@ -1,12 +1,19 @@
-import { updatePokemon } from "../presenters/updatePokemon.js"
+import { updateValidPokemon, updateFailedPokemon } from "../presenters/updatePokemon.js"
 
 export function getPokemon(searchTerm){
     const url = 'https://pokeapi.co/api/v2/pokemon/'+searchTerm
+    let data = {}
     fetch(url)
     .then(response => response.json())
-    .then(data => updatePokemon(data))
+    //if response if empty (e.g. not found), catches
     .catch( (error) => {
-        updatePokemon('Fail')
-        console.error('Error:', error)
+        updateFailedPokemon()
+        console.error('Error: No pokemon found - ', error)
+        return
     })
+    //if data has 
+    .then(data => {
+        if(data) updateValidPokemon(data)
+    })
+    
 }

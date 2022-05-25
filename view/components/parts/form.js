@@ -1,5 +1,5 @@
 import { getPokemon } from '../../../controllers/getPokemon.js'
-import { createHTMLElementObj } from '../../../helpers/dom.js'
+import { createHTMLElementObj, qs } from '../../../helpers/dom.js'
 //import { updateCenterText } from '../events/updateCenterText.js'
 
 
@@ -9,14 +9,20 @@ export function buildForm(){
     const textInput = createHTMLElementObj({
         element: 'input',
         classes: ['text-black', 'border', 'rounded', 'border-gray-500', 'p-2'],
-        attributes: [{name: 'type', value: 'text'}, {name: 'placeholder', value: 'Search by name or ID'}]
+        attributes: [{name: 'type', value: 'text'}, {name: 'placeholder', value: 'Search by name or ID'}, {name: 'id', value: 'textInput'}]
     })
 
     //build search element
     const btnSearch = createHTMLElementObj({
         element: 'input',
-        classes: ['h-3/4', 'border', 'rounded', 'border-gray-500', 'py-2', 'px-4', 'bg-purple-500', 'text-black', 'text-sm', 'font-semibold', 'hover:border-white'],
-        attributes: [{name: 'value', value: 'Search'}, {name: 'type', value: 'submit'}]
+        classes: ['h-3/4', 'border', 'rounded', 'border-gray-500', 'px-4', 'bg-purple-500', 'text-sm', 'font-semibold', 'hover:border-white'],
+        attributes: [{name: 'value', value: 'Search'}, {name: 'type', value: 'submit'}, {name: 'id', value: 'btnSearch'}]
+    })
+    btnSearch.addEventListener('click', (e) => {
+        searching(true)
+    })
+    btnSearch.addEventListener('searchCompleted', (e) => {
+        searching(false)
     })
 
     //build form
@@ -27,7 +33,9 @@ export function buildForm(){
         itemsToAppend: [textInput, btnSearch]
     })
     form.addEventListener('submit', (e) => { 
-        const searchInput = [...e.target.children].find(input => (input.type == 'text'))
+        //get text input element
+        const searchInput = qs('#textInput')
+        //case text input is empty
         if(!searchInput.value){
             const classes = ['border-red-500', 'error-animation']
             classes.forEach(element => {
@@ -38,8 +46,10 @@ export function buildForm(){
                     searchInput.classList.remove(element)
                 });
             }, 2000);
+            searching(false)
             return
         }
+        //pass data to controller
         getPokemon(searchInput.value)
     })
     //build container
@@ -50,4 +60,16 @@ export function buildForm(){
     })
     
     return container
+}
+
+function searching(bool){
+    const btnSearch = qs('#btnSearch')
+    if(bool) { 
+        btnSearch.value = 'Searching...'; 
+        qs('#datasheetDiv').classList.add('hidden')
+        qs('#messageDiv').classList.add('hidden')
+    }
+    else { 
+        btnSearch.value = 'Search'; 
+    }
 }

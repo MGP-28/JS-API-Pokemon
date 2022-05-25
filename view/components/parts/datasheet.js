@@ -9,7 +9,7 @@ export function buildDatasheet(){
     //build container for areas
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['flex', 'justify-center', 'items-center', 'hidden'],
+        classes: ['flex', 'flex-col-reverse', 'md:flex-row', 'justify-center', 'items-center', 'gap-5', 'px-5', 'hidden'],
         attributes: [{name: 'id', value: 'datasheetDiv'}],
         itemsToAppend: [datasheet, sprites]
     })
@@ -23,14 +23,18 @@ function buildData(){
     const liArr = []
     let labelArr = ['Name', 'ID', 'Types', 'Stats']
     labelArr.forEach(title => {
+        //span for each value
         const span = createHTMLElementObj({
             element: 'span',
             attributes:[ {name: 'id', value: `pokemon-${title.toLowerCase()}`} ]
         })
+        if(title == 'Types') span.classList.add('text-shadow')
+        //li with label and span
         const li = createHTMLElementObj({
             element: 'li',
             textContent: `${title}: `,
-            itemsToAppend: [span]
+            itemsToAppend: [span],
+            classes: ['mb-5']
         })
         liArr.push(li)
     });
@@ -52,7 +56,7 @@ function buildData(){
     const statsList = createHTMLElementObj({
         element: 'ul',
         itemsToAppend: statsArr,
-        classes: ['grid', 'grid-rows-3', 'grid-cols-2', 'pl-5']
+        classes: ['grid', 'grid-rows-3', 'grid-cols-2', 'gap-x-3', 'gap-y-1', 'pl-5']
     })
     liArr.push(statsList)
 
@@ -60,7 +64,7 @@ function buildData(){
     const ul = createHTMLElementObj({
         element: 'ul',
         itemsToAppend: liArr,
-        classes: ['w-1/2', 'px-5']
+        classes: ['w-3/4', 'md:w-80']
     })
 
     return ul
@@ -85,7 +89,7 @@ function buildSprites(){
     //build container
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['flex', 'gap-5', 'justify-center', 'items-center', 'w-1/2', 'px-5'],
+        classes: ['w-full', 'md:w-80', 'flex', 'gap-5', 'justify-center', 'items-center'],
         itemsToAppend: spriteArr
     })
     

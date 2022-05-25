@@ -86,3 +86,26 @@ select {
 .error-animation{
   animation: kf_shake 0.6s linear;
 }
+
+span{
+  font-weight: 700;
+  color:rgb(252, 212, 180)
+}
+
+@keyframes success_color {
+  0% { background-color: red;}
+  20% { background-color: yellow}
+  40% { background-color: green}
+  60% { background-color: blue;}
+  80% { background-color: purple;}
+  100% { background-color: none}
+}
+
+.found-animation{
+  animation: success_color 1.5s linear;
+}
+
+.text-shadow{
+  text-shadow: 2px 2px black;
+}
+
