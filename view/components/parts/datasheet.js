@@ -64,7 +64,7 @@ function buildData(){
     const ul = createHTMLElementObj({
         element: 'ul',
         itemsToAppend: liArr,
-        classes: ['w-3/4', 'md:w-80']
+        classes: ['w-80']
     })
 
     return ul
@@ -89,7 +89,7 @@ function buildSprites(){
     //build container
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['w-full', 'md:w-80', 'flex', 'gap-5', 'justify-center', 'items-center'],
+        classes: ['w-80', 'flex', 'gap-5', 'justify-center', 'items-center'],
         itemsToAppend: spriteArr
     })
     

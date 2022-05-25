@@ -1,6 +1,7 @@
 import { createHTMLElementObj, qs } from "../helpers/dom.js"
 import { capitalizeFirstLetter } from "../helpers/string.js"
 import { getPokemonTypeColor } from "../store/pokemon.js"
+import { messageFail, messageSuccess } from "../view/components/parts/message.js"
 
 function finishedSearch(){
     const event = new Event('searchCompleted')
@@ -15,14 +16,8 @@ export function updateFailedPokemon(){
 
     qs('#messageDiv').classList.remove('hidden')
 
-    const message = qs('#message')
-    message.textContent = 'No Pokemon Found!'
-    message.classList.add('error-animation')
-    message.classList.add('w-1/2')
-    setTimeout(()=>{
-        message.classList.remove('error-animation')
-        message.classList.remove('w-1/2')
-    }, 1500)
+    messageFail()
+
 }
 
 export function updateValidPokemon(data){
@@ -44,12 +39,9 @@ export function updateValidPokemon(data){
 
 function activateMessage(){
     const messageDiv = qs('#messageDiv')
-    const message = qs('#message')
     messageDiv.classList.remove('hidden')
-    message.classList.add('found-animation')
-    message.textContent = 'Pokemon Found!'
+    messageSuccess()
     setTimeout(()=>{
-        message.classList.remove('found-animation')
         activateInfo()
     }, 1500)
 }
@@ -57,16 +49,10 @@ function activateMessage(){
 function activateInfo(){
     const datasheet = qs('#datasheetDiv')
     const messageDiv = qs('#messageDiv')
-    const message = qs('#message')
     if(datasheet.classList.contains('hidden')) {
         datasheet.classList.remove('hidden')
         messageDiv.classList.remove('hidden')
     }
-    message.classList.add('found-animation')
-    message.textContent = 'Pokemon Found!'
-    setTimeout(()=>{
-        message.classList.remove('found-animation')
-    }, 1500)
 }
 
 function updateNameID(name, id){

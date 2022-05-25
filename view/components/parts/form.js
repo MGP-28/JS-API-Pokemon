@@ -5,14 +5,18 @@ import { createHTMLElementObj, qs } from '../../../helpers/dom.js'
 
 export function buildForm(){
 
+    //
     //build text input element
+    //
     const textInput = createHTMLElementObj({
         element: 'input',
         classes: ['text-black', 'border', 'rounded', 'border-gray-500', 'p-2'],
         attributes: [{name: 'type', value: 'text'}, {name: 'placeholder', value: 'Search by name or ID'}, {name: 'id', value: 'textInput'}]
     })
 
+    //
     //build search element
+    //
     const btnSearch = createHTMLElementObj({
         element: 'input',
         classes: ['h-3/4', 'border', 'rounded', 'border-gray-500', 'px-4', 'bg-purple-500', 'text-sm', 'font-semibold', 'hover:border-white'],
@@ -25,18 +29,25 @@ export function buildForm(){
         searching(false)
     })
 
+    //
     //build form
+    //
     const form = createHTMLElementObj({
         element: 'form',
         classes: ['flex', 'items-center', 'gap-5'],
         attributes: [{name: 'action', value: ' '}, {name: 'onSubmit', value: 'return false'}],
         itemsToAppend: [textInput, btnSearch]
     })
+
+    //
+    // Logic for submit event
+    //
     form.addEventListener('submit', (e) => { 
         //get text input element
         const searchInput = qs('#textInput')
+        const searchInputValue = searchInput.value
         //case text input is empty
-        if(!searchInput.value){
+        if(!searchInputValue){
             const classes = ['border-red-500', 'error-animation']
             classes.forEach(element => {
                 searchInput.classList.add(element)
@@ -50,7 +61,7 @@ export function buildForm(){
             return
         }
         //pass data to controller
-        getPokemon(searchInput.value)
+        getPokemon(searchInputValue.toLowerCase())
     })
     //build container
     const container = createHTMLElementObj({
