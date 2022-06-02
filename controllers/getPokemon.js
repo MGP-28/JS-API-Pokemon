@@ -2,7 +2,6 @@ import { updateValidPokemon, updateFailedPokemon } from "../presenters/updatePok
 
 export function getPokemon(searchTerm){
     const url = 'https://pokeapi.co/api/v2/pokemon/'+searchTerm
-    let data = {}
     fetch(url)
     .then(response => response.json())
     //if response if empty (e.g. not found), catches
@@ -15,5 +14,4 @@ export function getPokemon(searchTerm){
     .then(data => {
         if(data) updateValidPokemon(data)
     })
-    
 }

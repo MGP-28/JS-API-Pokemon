@@ -1,3 +1,5 @@
+import { getAllPokemon } from "../controllers/getPokemon"
+
 const pokemonTypes = [
     {name: 'Normal', color: '#5c5c3b'},
     {name: 'Fire', color: '#bd570d'},
@@ -22,6 +24,5 @@ const pokemonTypes = [
 ]
 
 export function getPokemonTypeColor(type){
-    console.log(type)
     return pokemonTypes.find(el => el.name == type).color
 }
