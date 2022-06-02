@@ -1,4 +1,4 @@
-import { getPokemon } from '../../../controllers/getPokemon.js'
+import { getPokemon } from '../../../controllers/getPokemonSearch.js'
 import { createHTMLElementObj, qs } from '../../../helpers/dom.js'
 //import { updateCenterText } from '../events/updateCenterText.js'
 
