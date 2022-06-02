@@ -1,6 +1,6 @@
 import { getAllPokemon } from './controllers/getAllPokemon.js'
 import {classesHTMLtoJsArray} from './helpers/classesHTMLtoJSArray.js'
-import {buildUI} from './view/components/base/baseUI.js'
+import {buildUI} from './presenters/baseUI.js'
 
 //debug / tools
 classesHTMLtoJsArray('')

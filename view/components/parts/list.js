@@ -9,5 +9,10 @@ export function buildList(pokemonArr){
         attributes: [{name: 'id', value: 'listDiv'}]
     })
 
+    for (let index = 0; index < pokemonArr.length; index++) {
+        const element = array[index];
+        
+    }
+
     return container
 }

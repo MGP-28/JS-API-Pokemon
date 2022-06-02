@@ -30,3 +30,7 @@ export function getPokemonTypeColor(type){
 export function storePokemonList(pokemonArrAPI){
     pokemonArr = pokemonArrAPI
 }
+
+export function getPokemonList(){
+    return pokemonArr
+}
