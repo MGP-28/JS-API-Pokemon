@@ -27,8 +27,8 @@ export function getPokemonTypeColor(type){
     return pokemonTypes.find(el => el.name == type).color
 }
 
-export function storePokemonList(pokemonArrAPI){
-    pokemonArr = pokemonArrAPI
+export function storePokemon(pokemon){
+    pokemonArr.push(pokemon)
 }
 
 export function getPokemonList(){

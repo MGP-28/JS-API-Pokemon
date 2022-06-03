@@ -1,14 +1,25 @@
+import { buildPokemonList } from "../presenters/loadPokemonCards.js"
 import { updateFailedPokemon } from "../presenters/updatePokemon.js"
-import { storePokemonList } from "../store/pokemon.js"
+import { storePokemon } from "../store/pokemon.js"
 
 export function getAllPokemon(){
     const url = 'https://pokeapi.co/api/v2/pokemon/?limit=151'
     fetch(url)
     .then(response => response.json())
-    //if data has results
+    //get each pokemon's data and store it
     .then(data => {
-        const pokemonListBase = data.results
-        getEachPokemon(pokemonListBase)
+        let promises = []
+    
+        data.results.forEach(pokemonRaw => {
+            const promise = fetch(pokemonRaw.url)
+            promises.push(promise)
+        });
+
+        Promise.all(promises)
+        .then((values) => {
+            console.log(values)
+            getEachPokemon(values)
+        })
     })
     //if response if empty (e.g. not found), catches
     .catch( (error) => {
@@ -17,23 +28,20 @@ export function getAllPokemon(){
     })
 }
 
-function getEachPokemon(pokemonListBase){
-    let pokemonListReady = []
-    pokemonListBase.forEach(pokemon => {
-        const url = `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-        fetch(url)
-        .then(response => response.json())
-        //if response if empty (e.g. not found), catches
-        .catch( (error) => {
-            console.error('Error: No pokemon found - ', error)
-        })
-        //if data has 
-        .then(data => {
-            if(data) {
-                pokemonListReady.push(data)
-            }
-        })
-    });
+function getEachPokemon(pokemonListRaw){
 
-    storePokemonList(pokemonListReady)
+    pokemonListRaw.forEach(pokemonData => {
+        
+        const {name, id, types, stats, sprites} = pokemonData
+        const pokemon = {
+            name: name, id: id, types: types, stats: stats, sprites: sprites
+        }
+        
+        console.log(pokemonData)
+
+        storePokemon(pokemon)
+
+    })
+
+    buildPokemonList()
 }
