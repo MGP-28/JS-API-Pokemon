@@ -3,19 +3,27 @@ import { buildPokemonCard } from "./list/pokemonCard.js"
 
 export function buildList(pokemonArr){
 
-    //build container that doubles as grid for pokemon cards
-    const container = createHTMLElementObj({
+    //build list with set width
+    const list = createHTMLElementObj({
         element: 'div',
-        classes: ['grid', 'grid-col-5', 'gap-5', 'px-5', 'hidden'],
+        classes: ['w-list', 'flex', 'flex-wrap', 'justify-center', 'gap-5', 'px-5', 'hidden'],
         attributes: [{name: 'id', value: 'listDiv'}]
     })
 
-    container.addEventListener('DataLoaded', (e) => {
+    list.addEventListener('Data Loaded', (e) => {
         for (let index = 0; index < pokemonArr.length; index++) {
             const pokemonCard = buildPokemonCard(pokemonArr[index])
-            container.appendChild(pokemonCard)
+            list.appendChild(pokemonCard)
         }
+        e.target.classList.remove('hidden')
     })
 
+
+    //build container that doubles as grid for pokemon cards
+    const container = createHTMLElementObj({
+        element: 'div',
+        classes: ['w-full', 'flex', 'justify-center', 'mt-20'],
+        itemsToAppend: [list]
+    })
     return container
 }

@@ -1,4 +1,4 @@
-import { getPokemonList, sortPokemonId } from "../store/pokemon.js"
+import { getPokemonList } from "../store/pokemon.js"
 import { buildDatasheet } from "../view/components/parts/datasheet.js"
 import { buildForm } from "../view/components/parts/form.js"
 import { buildList } from "../view/components/parts/list.js"
@@ -16,7 +16,6 @@ export function buildUI(){
     //build datasheet
     app.appendChild(buildDatasheet())
     //build 1st gen pokemon list
-    sortPokemonId()
     const pokemonList = getPokemonList()
     app.appendChild(buildList(pokemonList))
 }

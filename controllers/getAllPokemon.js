@@ -1,27 +1,33 @@
+import { qs } from "../helpers/dom.js"
 import { storePokemon } from "../store/pokemon.js"
 
 export async function getAllPokemon(){
 
     const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
+    const urls = []
+
     for (let index = 1; index <= 151; index++) {
         const url = baseUrl + index
-        getPokemonFromAPI(url)
+        urls.push(url)
     }
+
+    const pokemonListRaw = await getPokemonsFromAPI(urls)
+
+    pokemonListRaw.forEach(json => {
+        sendPokemonToStorage(json)
+    });
+
+    const dataLoadedEvent = new Event('Data Loaded')
+    qs('#listDiv').dispatchEvent(dataLoadedEvent)
 }
 
-async function getPokemonFromAPI(url){
+async function getPokemonsFromAPI(urls) {
 
-    try{
-        const response = await fetch(url)
-        const data = await response.json()
-        sendPokemonToStorage(data)
-    }
-    catch (error) {
-        console.error('Error: No pokemon found - ', error)
-        return
-    }
-}
+    const responses = await Promise.all(urls.map(url => fetch(url)))
+    const jsons = await Promise.all(responses.map(response => response.json()))
+    return jsons
+  }
 
 function sendPokemonToStorage(pokemonRaw){
 
@@ -29,8 +35,6 @@ function sendPokemonToStorage(pokemonRaw){
     const pokemon = {
         name: name, id: id, types: types, stats: stats, sprites: sprites
     }
-
-    console.log(pokemon)
 
     storePokemon(pokemon)
 }

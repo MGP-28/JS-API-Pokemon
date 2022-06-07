@@ -34,10 +34,3 @@ export async function storePokemon(pokemon){
 export function getPokemonList(){
     return pokemonArr
 }
-
-export function sortPokemonId(){
-    pokemonArr.sort(function (a, b) {
-        if(a.id > b.id) return 1
-        return -1
-      });
-}

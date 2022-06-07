@@ -6,7 +6,7 @@ export function buildPokemonCard(pokemon){
     //build sprite
     const sprite = createHTMLElementObj({
         element: 'img',
-        attributes: [{name: 'src', value: '#'}, {name: 'id', value: 'sprite-default'}]
+        attributes: [{name: 'src', value: pokemon.sprites['front_default']}, {name: 'id', value: 'sprite-default'}]
     })
 
     //build title
@@ -19,7 +19,7 @@ export function buildPokemonCard(pokemon){
     //build card container
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['h-28', 'w-28', 'bg-gray-500', 'rounded', 'flex', 'justify-center', 'items-center'],
+        classes: ['h-40', 'w-40', 'bg-gray-500', 'rounded', 'flex', 'flex-col', 'justify-center', 'items-center'],
         attributes: [{name: 'pokemonId', value: pokemon['id']}],
         itemsToAppend: [sprite, title]
     })
