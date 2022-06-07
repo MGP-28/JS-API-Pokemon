@@ -112,3 +112,9 @@ span{
 .w-list{
   width: 920px;
 }
+
+@media screen and (min-width: 768px){
+  .btn-back-position{
+    left: calc(50vw + 210px);
+  }
+}

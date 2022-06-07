@@ -27,10 +27,14 @@ export function getPokemonTypeColor(type){
     return pokemonTypes.find(el => el.name == type).color
 }
 
-export async function storePokemon(pokemon){
+export function storePokemon(pokemon){
     pokemonArr.push(pokemon)
 }
 
 export function getPokemonList(){
     return pokemonArr
+}
+
+export function getPokemonById(id){
+    return pokemonArr[id-1]
 }

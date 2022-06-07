@@ -1,5 +1,6 @@
 import { capitalizeFirstLetter } from "../../../../helpers/string.js"
 import { createHTMLElementObj } from "../../../../helpers/dom.js"
+import { activateDetails } from "../../../../presenters/cardsToDetailsToggler.js"
 
 export function buildPokemonCard(pokemon){
 
@@ -22,6 +23,16 @@ export function buildPokemonCard(pokemon){
         classes: ['h-40', 'w-40', 'bg-gray-500', 'rounded', 'flex', 'flex-col', 'justify-center', 'items-center'],
         attributes: [{name: 'pokemonId', value: pokemon['id']}],
         itemsToAppend: [sprite, title]
+    })
+
+    container.addEventListener('click', (e) => {
+        let element = e.target
+        let pokemonid = element.getAttribute('pokemonid')
+        while(!pokemonid){
+            element = element.parentElement
+            pokemonid = element.getAttribute('pokemonid')
+        }
+        activateDetails(pokemonid)
     })
 
     return container

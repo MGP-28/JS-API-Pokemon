@@ -1,17 +1,18 @@
-import { createHTMLElement, createHTMLElementObj, qs } from '../../../helpers/dom.js'
+import { appendElements, createHTMLElement, createHTMLElementObj, qs } from '../../../helpers/dom.js'
+import { buildBackButton } from './list/backButton.js'
 
 export function buildMessage(){
 
     const title = createHTMLElementObj({
         element: 'h1',
         textContent: '',
-        classes: ['w-full', 'text-center', 'text-3xl', 'font-bold', 'py-14', 'flex', 'justify-center', 'gap-5'],
+        classes: ['w-full', 'text-3xl', 'font-bold', 'py-14', 'flex', 'justify-center', 'gap-5'],
         attributes: [{name: 'id', value: 'message'}]
     })
     
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['flex', 'justify-center', 'py-5', 'hidden'],
+        classes: ['flex', 'justify-center', 'items-center', 'py-5', 'hidden'],
         attributes: [{name: 'id', value: 'messageDiv'}],
         itemsToAppend: [title]
     })
@@ -28,10 +29,12 @@ export function messageSuccess(){
         attributes: [{name: 'src', value: './assets/img/pokeball.png'}],
         classes: ['w-10']
     })
-    message.appendChild(icon)
 
     const span = createHTMLElement('span', 'Pokemon Found!')
-    message.appendChild(span)
+
+    const button = buildBackButton()
+
+    appendElements(message, [icon, span, button])
 
     message.classList.add('found-animation')
     setTimeout(()=>{
