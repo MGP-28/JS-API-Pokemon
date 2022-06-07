@@ -3,8 +3,6 @@ import { createHTMLElementObj } from "../../../../helpers/dom.js"
 
 export function buildPokemonCard(pokemon){
 
-    console.log(pokemon)
-
     //build sprite
     const sprite = createHTMLElementObj({
         element: 'img',

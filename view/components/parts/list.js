@@ -1,7 +1,7 @@
 import { createHTMLElementObj } from "../../../helpers/dom.js"
 import { buildPokemonCard } from "./list/pokemonCard.js"
 
-export function buildList(){
+export function buildList(pokemonArr){
 
     //build container that doubles as grid for pokemon cards
     const container = createHTMLElementObj({

@@ -5,8 +5,13 @@ import {buildUI} from './presenters/baseUI.js'
 //debug / tools
 classesHTMLtoJsArray('')
 
-//get pokemon data
-getAllPokemon()
+startPage()
 
-//build UI
-buildUI()
+async function startPage(){
+
+    //get pokemon data
+    getAllPokemon()
+
+    //build UI
+    buildUI()
+}
