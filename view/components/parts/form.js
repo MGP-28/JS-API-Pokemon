@@ -1,6 +1,6 @@
 //import { getPokemon } from '../../../controllers/getPokemonSearch.js'
 import { createHTMLElementObj, qs } from '../../../helpers/dom.js'
-import { filterCards, showAllCards } from '../../../presenters/filterCards.js'
+import { filterCardsByName, filterCardsById, showAllCards } from '../../../presenters/filterCards.js'
 
 
 export function buildForm(){
@@ -67,8 +67,10 @@ export function buildForm(){
             searching(false)
             return
         }
-        //pass data to presenter to filter
-        const contCards = filterCards(searchInputValue.toLowerCase())       
+        //check if number or string and passes info
+        console.log(searchInputValue)
+        if(isNaN(searchInputValue)) filterCardsByName(searchInputValue.toLowerCase())
+        else filterCardsById(searchInputValue)
     })
     //build container
     const container = createHTMLElementObj({
