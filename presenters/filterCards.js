@@ -1,6 +1,6 @@
 import { qs } from "../helpers/dom.js";
 import { getPokemonById } from "../store/pokemon.js";
-import { updateFailedPokemon, updateValidPokemon } from "./updatePokemon.js";
+import { finishedSearch, updateFailedPokemon, updateValidPokemon } from "./updatePokemon.js";
 
 export function filterCardsByName(searchTerm){
 
@@ -9,6 +9,7 @@ export function filterCardsByName(searchTerm){
 
     //get List element
     const listEl = qs('#listDiv')
+    listEl.classList.remove('hidden')
 
     //counter for number of results found
     let cont = 0
@@ -46,6 +47,8 @@ export function filterCardsByName(searchTerm){
         default:
             break;
     }
+
+    finishedSearch()
 }
 
 export function filterCardsById(searchTerm){
@@ -55,6 +58,7 @@ export function filterCardsById(searchTerm){
 
     //get List element
     const listEl = qs('#listDiv')
+    listEl.classList.remove('hidden')
 
     //counter for number of results found (1 max, used to see if no results are found)
     let cont = 0
@@ -75,6 +79,8 @@ export function filterCardsById(searchTerm){
 
     //if no result is found, displays corresponding message
     if(cont == 0) updateFailedPokemon()
+
+    finishedSearch()
 }
 
 export function showAllCards(){

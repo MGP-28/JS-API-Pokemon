@@ -20,7 +20,7 @@ export function buildPokemonCard(pokemon){
     //build card container
     const container = createHTMLElementObj({
         element: 'div',
-        classes: ['h-40', 'w-40', 'bg-gray-500', 'rounded', 'flex', 'flex-col', 'justify-center', 'items-center'],
+        classes: ['h-40', 'w-40', 'bg-gray-500', 'rounded', 'flex', 'flex-col', 'justify-center', 'items-center', 'zoom'],
         attributes: [{name: 'pokemonId', value: pokemon['id']}],
         itemsToAppend: [sprite, title]
     })
