@@ -1,6 +1,6 @@
-import { getPokemon } from '../../../controllers/getPokemon.js'
+//import { getPokemon } from '../../../controllers/getPokemonSearch.js'
 import { createHTMLElementObj, qs } from '../../../helpers/dom.js'
-//import { updateCenterText } from '../events/updateCenterText.js'
+import { filterCardsByName, filterCardsById, showAllCards } from '../../../presenters/filterCards.js'
 
 
 export function buildForm(){
@@ -12,6 +12,13 @@ export function buildForm(){
         element: 'input',
         classes: ['text-black', 'border', 'rounded', 'border-gray-500', 'p-2'],
         attributes: [{name: 'type', value: 'text'}, {name: 'placeholder', value: 'Search by name or ID'}, {name: 'id', value: 'textInput'}]
+    })
+
+    textInput.addEventListener('keyup', (e) => {
+        if(e.target.value == '') {
+            showAllCards()
+            return
+        }
     })
 
     //
@@ -60,8 +67,10 @@ export function buildForm(){
             searching(false)
             return
         }
-        //pass data to controller
-        getPokemon(searchInputValue.toLowerCase())
+        //check if number or string and passes info
+        console.log(searchInputValue)
+        if(isNaN(searchInputValue)) filterCardsByName(searchInputValue.toLowerCase())
+        else filterCardsById(searchInputValue)
     })
     //build container
     const container = createHTMLElementObj({

@@ -4,11 +4,13 @@ import { getPokemonTypeColor } from "../store/pokemon.js"
 import { messageFail, messageSuccess } from "../view/components/parts/message.js"
 
 function finishedSearch(){
+    //calls button event and search end
     const event = new Event('searchCompleted')
     qs('#btnSearch').dispatchEvent(event)
 }
 
 export function updateFailedPokemon(){
+    //only shows message portion of UI with an error message
 
     finishedSearch()
 
@@ -21,6 +23,10 @@ export function updateFailedPokemon(){
 }
 
 export function updateValidPokemon(data){
+    //activates message portion of UI with animation
+    //after a set time, details will show (called inside "activateMessage()")
+    //get relevant info from pokemon data received
+    //update each portion of UI with the new relevant data
 
     finishedSearch()
 
@@ -38,6 +44,8 @@ export function updateValidPokemon(data){
 }
 
 function activateMessage(){
+    //shows success message and, after animation ends, the detail section
+
     const messageDiv = qs('#messageDiv')
     messageDiv.classList.remove('hidden')
     messageSuccess()
@@ -47,15 +55,18 @@ function activateMessage(){
 }
 
 function activateInfo(){
+    //if details' data section is hidden, show it along with "back" button
+
     const datasheet = qs('#datasheetDiv')
-    const messageDiv = qs('#messageDiv')
+    const backButton = qs('#backBtn')
     if(datasheet.classList.contains('hidden')) {
         datasheet.classList.remove('hidden')
-        messageDiv.classList.remove('hidden')
+        backButton.classList.remove('hidden')
     }
 }
 
 function updateNameID(name, id){
+    //get name element on detail section and replace it
     qs('#pokemon-name').textContent = capitalizeFirstLetter(name)
     qs('#pokemon-id').textContent = id
 }
