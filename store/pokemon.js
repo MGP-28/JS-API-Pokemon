@@ -1,5 +1,7 @@
+//stores pokemon data (each entry, 1 pokemon). Ordered by pokemon ID
 let pokemonArr = []
 
+//pokemon types and respective color. for UI
 const pokemonTypes = [
     {name: 'Normal', color: '#5c5c3b'},
     {name: 'Fire', color: '#bd570d'},
@@ -23,18 +25,22 @@ const pokemonTypes = [
     {name: '???', color: '#50857b'}
 ]
 
+//receives type, returns respective color from stored array
 export function getPokemonTypeColor(type){
     return pokemonTypes.find(el => el.name == type).color
 }
 
+//receives pokemon, stores it into array
 export function storePokemon(pokemon){
     pokemonArr.push(pokemon)
 }
 
+//return full pokemon array
 export function getPokemonList(){
     return pokemonArr
 }
 
+//receives ID, returns pokemon from array with respective ID
 export function getPokemonById(id){
     return pokemonArr[id-1]
 }

@@ -25,6 +25,7 @@ export function buildPokemonCard(pokemon){
         itemsToAppend: [sprite, title]
     })
 
+    //get pokemonID from card and show details for it
     container.addEventListener('click', (e) => {
         let element = e.target
         let pokemonid = element.getAttribute('pokemonid')

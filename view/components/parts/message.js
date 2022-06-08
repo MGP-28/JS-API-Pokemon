@@ -2,6 +2,7 @@ import { appendElements, createHTMLElement, createHTMLElementObj, qs } from '../
 import { buildBackButton } from './list/backButton.js'
 
 export function buildMessage(){
+    //base message element (no information in it)
 
     const title = createHTMLElementObj({
         element: 'h1',
@@ -21,8 +22,12 @@ export function buildMessage(){
 }
 
 export function messageSuccess(){
-    const message = qs('#message')
-    message.textContent = ''
+    //resets message's text
+    //builds and inserts success message:
+    //pokeball icon + text + "return to list" button
+    //element gets a short animation, return button is hidden while the animation lasts
+
+    messageReset()
 
     const icon = createHTMLElementObj({
         element: 'img',
@@ -43,8 +48,11 @@ export function messageSuccess(){
 }
 
 export function messageFail(){
-    const message = qs('#message')
-    message.textContent = ''
+    //resets message's text
+    //displays only a text element
+    //short animation used
+
+    messageReset()
 
     const span = createHTMLElement('span', 'No Pokemon Found!')
     message.appendChild(span)
@@ -55,4 +63,9 @@ export function messageFail(){
         message.classList.remove('error-animation')
         message.classList.remove('w-1/2')
     }, 1500)
+}
+
+function messageReset(){
+    const message = qs('#message')
+    message.textContent = ''
 }

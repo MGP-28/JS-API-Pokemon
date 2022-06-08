@@ -15,7 +15,7 @@ export function buildUI(){
     app.appendChild(buildMessage())
     //build datasheet
     app.appendChild(buildDatasheet())
-    //build 1st gen pokemon list
+    //build pokemon list (without pokemon cards)
     const pokemonList = getPokemonList()
     app.appendChild(buildList(pokemonList))
 }
