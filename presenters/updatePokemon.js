@@ -49,9 +49,11 @@ function activateMessage(){
 function activateInfo(){
     const datasheet = qs('#datasheetDiv')
     const messageDiv = qs('#messageDiv')
+    const backButton = qs('#backBtn')
     if(datasheet.classList.contains('hidden')) {
         datasheet.classList.remove('hidden')
         messageDiv.classList.remove('hidden')
+        backButton.classList.remove('hidden')
     }
 }
 

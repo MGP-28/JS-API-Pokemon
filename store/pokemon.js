@@ -1,4 +1,4 @@
-import { getAllPokemon } from "../controllers/getPokemon"
+let pokemonArr = []
 
 const pokemonTypes = [
     {name: 'Normal', color: '#5c5c3b'},
@@ -25,4 +25,16 @@ const pokemonTypes = [
 
 export function getPokemonTypeColor(type){
     return pokemonTypes.find(el => el.name == type).color
+}
+
+export function storePokemon(pokemon){
+    pokemonArr.push(pokemon)
+}
+
+export function getPokemonList(){
+    return pokemonArr
+}
+
+export function getPokemonById(id){
+    return pokemonArr[id-1]
 }
