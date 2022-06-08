@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from "../helpers/string.js"
 import { getPokemonTypeColor } from "../store/pokemon.js"
 import { messageFail, messageSuccess } from "../view/components/parts/message.js"
 
-function finishedSearch(){
+export function finishedSearch(){
     //calls button event and search end
     const event = new Event('searchCompleted')
     qs('#btnSearch').dispatchEvent(event)
