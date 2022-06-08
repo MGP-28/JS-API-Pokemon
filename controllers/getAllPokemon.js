@@ -5,6 +5,7 @@ export async function getAllPokemon(){
 
     const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
+    //build all links to fetch (by ID)
     const urls = []
 
     for (let index = 1; index <= 151; index++) {
@@ -12,12 +13,15 @@ export async function getAllPokemon(){
         urls.push(url)
     }
 
+    //get all pokemons from API
     const pokemonListRaw = await getPokemonsFromAPI(urls)
 
+    //cycle each pokemon json, get their relevant info and store it
     pokemonListRaw.forEach(json => {
         sendPokemonToStorage(json)
     });
 
+    //after all pokemons are stored, dispatch event to list to build cards
     const dataLoadedEvent = new Event('Data Loaded')
     qs('#listDiv').dispatchEvent(dataLoadedEvent)
 }
